@@ -17,10 +17,11 @@ end
 
 describe 'user finder' do
   it 'returns a collection of Users based on a location' do
-    pending
-    users = User.by_location 'Omaha'
-    users.should be_an Array
-    users.length.should > 1
+    VCR.use_cassette 'location_search' do
+      users = User.by_location 'Omaha'
+      users.should be_an Array
+      users.length.should > 1
+    end
   end
 
   it 'returns repositories for a given user' do
