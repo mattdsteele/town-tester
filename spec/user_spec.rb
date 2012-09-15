@@ -1,5 +1,12 @@
 require 'rspec'
 require 'user'
+require 'vcr'
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'fixtures/vcr'
+  c.hook_into :fakeweb
+end
+
 
 describe 'user' do
   it "has a collection of repositories" do
@@ -16,4 +23,11 @@ describe 'user finder' do
     users.length.should > 1
   end
 
+  it 'returns repositories for a given user' do
+    VCR.use_cassette 'repo_search' do
+      repos = User.repos_for 'mattdsteele'
+      repos.should be_an Enumerable
+      repos.length.should > 1
+    end
+  end
 end

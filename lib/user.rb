@@ -13,4 +13,8 @@ class User
   def self.by_location(location)
     []
   end
+
+  def self.repos_for(user)
+    Octokit.repositories(user)
+  end
 end
