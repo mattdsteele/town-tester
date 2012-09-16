@@ -14,7 +14,6 @@ describe 'user finder' do
     VCR.use_cassette 'location_search' do
       users = User.by_location 'Omaha'
       users.should be_an Enumerable
-      users.length.should > 1
     end
   end
 end
