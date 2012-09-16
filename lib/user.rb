@@ -12,7 +12,7 @@ class User
 
   def self.by_location(location)
     Octokit.search_users('location=Omaha').keep_if {|u| u.type == 'user' }.map do |u|
-      User.new(u.name, nil)
+      User.new(u.name, repos_for(u.username))
     end
   end
 
