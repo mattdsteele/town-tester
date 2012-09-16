@@ -28,7 +28,7 @@ def write_csv(repos, location)
 end
 
 def main
-  print  "Location to search: "
+  print  "City to search: "
   location = gets.chomp
 
   puts "Finding repos in #{location}..."
