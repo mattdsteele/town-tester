@@ -11,9 +11,9 @@ class User
   end
 
   def self.by_location(location)
-    Octokit.search_users('location=Omaha').keep_if {|u| u.type == 'user' }.map do |u|
-      User.new(u.name, repos_for(u.username))
-    end
+    Octokit.search_users('location=Omaha')
+      .keep_if {|u| u.type == 'user' }
+      .map { |u| User.new(u.name, repos_for(u.username)) }
   end
 
   def self.repos_for(user)
