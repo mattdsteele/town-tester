@@ -17,6 +17,12 @@ class User
   end
 
   def self.repos_for(user)
-    Octokit.repositories(user)
+    Octokit.repositories(user).map do |r|
+      {
+        :language => r.language,
+        :name => r.full_name,
+        :clone_url => r.clone_url
+      }
+    end
   end
 end

@@ -24,7 +24,11 @@ describe 'repo search' do
     VCR.use_cassette 'repo_search' do
       repos = User.repos_for 'mattdsteele'
       repos.should be_an Enumerable
-      repos.length.should > 1
+      repos.length.should be > 1
+
+      repo = repos.first
+      repo.should be_a Hash
+      repo.should include(:name)
     end
   end
 end
