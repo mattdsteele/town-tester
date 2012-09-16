@@ -7,6 +7,17 @@ describe 'user' do
     user = User.new('mattdsteele', ['mattdsteele/repo1', 'mattdsteele/repo2'])
     user.repositories.length.should == 2
   end
+
+  it "can return a list of repositories" do
+    user = User.new('mattdsteele', [
+                    { :name => 'repo1', :username => 'mattdsteele', :language => 'JavaScript' },
+                    { :name => 'repo2', :username => 'mattdsteele', :language => 'JavaScript' }
+    ])
+
+    repos = user.to_repos
+    repos.should be_an Enumerable
+    repos.first.should be_a Repo
+  end
 end
 
 describe 'user finder' do
@@ -14,6 +25,7 @@ describe 'user finder' do
     VCR.use_cassette 'location_search' do
       users = User.by_location 'Omaha'
       users.should be_an Enumerable
+      users.first.should be_a User
     end
   end
 end

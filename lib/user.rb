@@ -9,6 +9,12 @@ class User
   def repositories
     @repos
   end
+  
+  def to_repos
+    @repos.map do |r|
+      Repo.new(@name, r[:name], r[:clone_url], r[:language])
+    end
+  end
 
   def self.by_location(location)
     Octokit.search_users('location=Omaha')
