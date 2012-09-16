@@ -42,4 +42,11 @@ describe 'repo search' do
       repo.should include(:name)
     end
   end
+
+  it 'does not include dotfiles or unpopular repos' do
+    VCR.use_cassette 'repo_search' do
+      repos = User.repos_for 'mattdsteele'
+      repos.length.should == 4
+    end
+  end
 end

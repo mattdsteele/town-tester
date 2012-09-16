@@ -23,7 +23,10 @@ class User
   end
 
   def self.repos_for(user)
-    Octokit.repositories(user).map do |r|
+    Octokit.repositories(user)
+      .select {|r| r.watchers > 1 || r.forks > 1}
+      .select {|r| r.language? && r.language != 'VimL'}
+      .map do |r|
       {
         :language => r.language,
         :name => r.full_name,
