@@ -28,6 +28,11 @@ describe 'user finder' do
       users.first.should be_a User
     end
   end
+
+  it 'joins long words with + signs' do
+    Octokit.should_receive(:search_users).with('location:Los+Alamos').and_return([])
+    User.by_location 'Los Alamos'
+  end
 end
 
 describe 'repo search' do
