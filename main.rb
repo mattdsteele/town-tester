@@ -27,6 +27,11 @@ def write_csv(repos, location)
   puts "Statistics written to #{file_name}.csv"
 end
 
+def write_stats(repos)
+  puts "Statistics by language:"
+  puts Stats.new(repos).print_stats
+end
+
 def main
   print  "City to search: "
   location = gets.chomp
@@ -44,6 +49,7 @@ def main
   end
 
   write_csv repos, location
+  write_stats repos
 end
 
 main
