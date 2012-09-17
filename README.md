@@ -37,4 +37,4 @@ It will:
  
 ## Limitations
 * GitHub's User search API only returns 100 results, with no pagination
-* Searching a repository for tests is very simplistic - it just finds 
+* Searching a repository for tests is very simplistic - it just looks for any file with `test` or `spec` in its name
