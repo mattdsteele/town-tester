@@ -36,5 +36,6 @@ It will:
 * fakeweb
  
 ## Limitations
-* GitHub's User search API only returns 100 results, with no pagination
+* Sloooooooow. Currently clones *every* Github repository locally, which take take a ton of time.
+* GitHub's User search API only returns 100 results, with no pagination. This means not every repo in a given city will be checked.
 * Searching a repository for tests is very simplistic - it just looks for any file with `test` or `spec` in its name
