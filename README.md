@@ -9,7 +9,7 @@ It will:
 
 ## Usage
 
-    $ ./main
+    $ ./towntester
     Enter city: [Lincoln]
     Finding repos in Lincoln...
     Found 168 repositories. Checking for tests...
