@@ -36,22 +36,27 @@ describe 'user finder' do
 end
 
 describe 'repo search' do
+    let(:repos) { 
+      VCR.use_cassette 'repo_search' do
+        User.repos_for 'mattdsteele'
+      end
+    }
   it 'returns repositories for a given user' do
-    VCR.use_cassette 'repo_search' do
-      repos = User.repos_for 'mattdsteele'
-      repos.should be_an Enumerable
-      repos.length.should be > 1
+    repos.should be_an Enumerable
+    repos.length.should be > 1
 
-      repo = repos.first
-      repo.should be_a Hash
-      repo.should include(:name)
-    end
+    repo = repos.first
+    repo.should be_a Hash
+    repo.should include(:name)
   end
 
   it 'does not include dotfiles or unpopular repos' do
-    VCR.use_cassette 'repo_search' do
-      repos = User.repos_for 'mattdsteele'
-      repos.length.should == 4
+    repos.length.should == 4
+  end
+
+  it 'does not include any forks' do
+    repos.each do |r|
+      r[:fork].should be_false
     end
   end
 end
