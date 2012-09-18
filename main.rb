@@ -3,7 +3,7 @@ require_relative 'lib/repo'
 require 'csv'
 
 def checkout(repo_url)
-  `git clone -q #{repo_url} repo`
+  `git clone -q --depth 1 #{repo_url} repo`
 end
 
 def tests?
